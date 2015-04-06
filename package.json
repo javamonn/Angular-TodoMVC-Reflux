@@ -1,0 +1,17 @@
+{
+  "name": "angular-flux",
+  "version": "0.0.1",
+  "description": "Facebook's Flux applied to Angular",
+  "main": "js/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "author": "Daniel Ramirez",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.3.15"
+  }
+}
