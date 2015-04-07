@@ -8,6 +8,7 @@ var open = require('gulp-open');
 gulp.task('build', function() {
   gulp.src([
     './node_modules/angular/angular.js',
+    './node_modules/ramda/dist/ramda.js',
     './js/**/*.js'
   ])
   .pipe(concat('app.js'))
