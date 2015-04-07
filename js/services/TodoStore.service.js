@@ -48,7 +48,7 @@
           text = action.text.trim();
           if (text != '') {
             create(text);
-            TodoStore.broadcastChange(CHANGE_EVENT);
+            TodoStore.emitChange(CHANGE_EVENT);
           }
           break;
         case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
@@ -58,35 +58,37 @@
           else {
             updateAll({complete: 'true'});
           }
-          TodoStore.broadcastChange(CHANGE_EVENT);
+          TodoStore.emitChange(CHANGE_EVENT);
           break;
         case TodoConstants.TODO_UNDO_COMPLETE:
           update(action.id, {complete: 'false'});
-          TodoStore.broadcastChange(CHANGE_EVENT);
+          TodoStore.emitChange(CHANGE_EVENT);
           break;
         case TodoConstants.TODO_COMPLETE:
           update(action.id, {complete: 'true'});
-          TodoStore.broadcastChange(CHANGE_EVENT);
+          TodoStore.emitChange(CHANGE_EVENT);
           break;
         case TodoConstants.TODO_UPDATE_TEXT:
           text = action.text.trim();
           if (text != '') {
             update(action.id, {text: text});
-            TodoStore.broadcastChange(CHANGE_EVENT);
+            TodoStore.emitChange(CHANGE_EVENT);
           }
           break;
         case TodoConstants.TODO_DESTROY:
           destroy(action.id);
-          TodoStore.broadcastChange(CHANGE_EVENT);
+          TodoStore.emitChange(CHANGE_EVENT);
           break;
         case TodoConstants.TODO_DESTROY_COMPLETED:
           destroyCompleted();
-          TodoStore.broadcastChange(CHANGE_EVENT);
+          TodoStore.emitChange(CHANGE_EVENT);
           break;
         case default:
           // nop
       }
     });
+
+    registeredListeners = [];
 
     return {
       areAllComplete: function() {
@@ -101,18 +103,19 @@
       getAll: function() {
         return _todos;
       },
-      broadcastChange: function() {
-        // TODO - Not sure if rootscope is the best way to do this
-        //$rootScope.broadcast(CHANGE_EVENT); 
+      emitChange: function() {
+        $rootScope.emit(CHANGE_EVENT); 
       },
       addChangeListener: function(callback) {
-        // TODO
-        //$rootScope.on(CHANGE_EVENT, callback);
+        registeredListeners.push($rootScope.on(CHANGE_EVENT, callback));
       },
       removeChangeListener: function(callback) {
-        // TODO  
+        var fn = R.find(callback, registeredListeners);
+        if (fn) {
+          fn();
+        }
       }
-    }
+    };
   }
 
 })();
