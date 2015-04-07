@@ -18,18 +18,27 @@
     }
 
     function link(scope, elem, attrs) {
-      scope.todoState = getTodoState();
+
+      var onChange = function() {
+        scope.todoState = getTodoState();
+      };
 
       /**
        * Event handler for 'change' events coming from the TodoStore.
        */
       TodoStore.addChangeListener(function() {
-        scope.todoState = getTodoState();
+        TodoStore.addChangeListener(this.onChange);
       });
+
+      scope.on('$destroy', function() {
+        TodoStore.removeChangeLister(this.onChange);
+      });
+      scope.todoState = getTodoState();
     }
 
     return {
-      restrict: 'A',
+      restrict: 'E',
+      replace: true,
       templateUrl: 'components/todo-app.html',
       link: link
     };
