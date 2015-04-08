@@ -83,31 +83,31 @@
           destroyCompleted();
           TodoStore.emitChange(CHANGE_EVENT);
           break;
-        case default:
+        default:
           // nop
       }
     });
 
-    registeredListeners = [];
+    var registeredListeners = [];
 
     return {
       areAllComplete: function() {
         R.defaultTo(true, 
-          R.forEach(_todos, function(todo) {
+          R.forEach(function(todo) {
             if (!todo.complete) {
               return false;
             }
-          })
+          }, _todos)
         );
       },
       getAll: function() {
         return _todos;
       },
       emitChange: function() {
-        $rootScope.emit(CHANGE_EVENT); 
+        $rootScope.$emit(CHANGE_EVENT); 
       },
       addChangeListener: function(callback) {
-        registeredListeners.push($rootScope.on(CHANGE_EVENT, callback));
+        registeredListeners.push($rootScope.$on(CHANGE_EVENT, callback));
       },
       removeChangeListener: function(callback) {
         var fn = R.find(callback, registeredListeners);

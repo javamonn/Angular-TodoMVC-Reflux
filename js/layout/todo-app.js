@@ -30,7 +30,7 @@
         TodoStore.addChangeListener(this.onChange);
       });
 
-      scope.on('$destroy', function() {
+      scope.$on('$destroy', function() {
         TodoStore.removeChangeLister(this.onChange);
       });
       scope.todoState = getTodoState();
@@ -39,7 +39,7 @@
     return {
       restrict: 'E',
       replace: true,
-      templateUrl: 'components/todo-app.html',
+      templateUrl: './js/layout/todo-app.html',
       link: link
     };
   }
