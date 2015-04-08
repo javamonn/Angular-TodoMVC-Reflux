@@ -1,0 +1,10 @@
+<li ng-class="{'completed': todo.complete, 'editing': state.isEditing}">
+  <div class="view">
+    <input class="toggle" type="checkbox" ng-model="todo.complete"></input>
+    <label ngDblClick="_onToggleComplete()">{{todo.text}}</label>
+    <button class="destroy" ng-click="_onDestroyClick()"></button>
+  </div>
+  <div ng-show="state.isEditing">
+    <todo-text-input class="edit" on-save="onSave" value="todo.text"></todo-text-input>
+  </div>
+</li>

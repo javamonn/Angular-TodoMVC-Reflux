@@ -92,13 +92,9 @@
 
     return {
       areAllComplete: function() {
-        R.defaultTo(true, 
-          R.forEach(function(todo) {
-            if (!todo.complete) {
-              return false;
-            }
-          }, _todos)
-        );
+        R.all(function(todo) {
+          return todo.complete;
+        }, _todos);
       },
       getAll: function() {
         return _todos;
