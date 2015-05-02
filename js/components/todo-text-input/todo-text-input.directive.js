@@ -16,7 +16,10 @@
       },
       link: function(scope, elem, attrs) {
 
+        scope.inputValue = '';
+
         scope.saveState = function() {
+          console.log(scope.inputValue);
           scope.onSave(scope.inputValue);
           scope.inputValue = '';
         };

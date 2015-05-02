@@ -7,6 +7,7 @@
 
   function TodoActions(TodoDispatcher, TodoConstants) {
     var create = function(text) {
+      console.log('create');
       TodoDispatcher.dispatch({
         actionType: TodoConstants.TODO_CREATE,
         text: text

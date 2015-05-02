@@ -33,6 +33,7 @@
       scope.$on('$destroy', function() {
         TodoStore.removeChangeLister(this.onChange);
       });
+
       scope.todoState = getTodoState();
     }
 
