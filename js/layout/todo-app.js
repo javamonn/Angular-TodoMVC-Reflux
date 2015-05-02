@@ -17,7 +17,7 @@
       };
     }
 
-    function link(scope, elem, attrs) {
+    function TodoAppController($scope) {
 
       var onChange = function() {
         scope.todoState = getTodoState();
@@ -41,7 +41,8 @@
       restrict: 'E',
       replace: true,
       templateUrl: './js/layout/todo-app.html',
-      link: link
+      controllerAs: 'todoApp',
+      controller: ['$scope', TodoAppController]
     };
   }
 })();
