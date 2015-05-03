@@ -1,7 +1,5 @@
-var path = require('path');
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var open = require('gulp-open');
 var clean = require('gulp-clean');
 var traceur = require('gulp-traceur');
 var add = require('gulp-add-src');
@@ -33,11 +31,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('serve', ['build'], function() {
-
   gulp.watch('./js/**/*.js', ['build']);
-
-  return gulp.src('./index.html')
-    .pipe(open());
 });
 
 gulp.task('default', ['serve']);
