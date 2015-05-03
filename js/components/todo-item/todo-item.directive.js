@@ -26,6 +26,7 @@
 
         scope._onSave = function() {
           TodoActions.updateText(scope.todo.id, scope.todo.text); 
+          console.log('save');
         }
       }
     }

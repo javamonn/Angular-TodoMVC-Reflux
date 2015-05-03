@@ -5,10 +5,11 @@
     constructor(TodoActions) {
       this.TodoActions = TodoActions;
     }
+
     toggleCompleteAll() {
       TodoActions.toggelCompleteAll();
     }
-  };
+  }
 
   let MainSection = () => ({
     restrict: 'E',
