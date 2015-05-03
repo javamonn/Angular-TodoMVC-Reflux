@@ -21,6 +21,7 @@
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
     "gulp-open": "^0.3.2",
-    "gulp-traceur": "^0.17.1"
+    "gulp-traceur": "^0.17.1",
+    "traceur": "0.0.89"
   }
 }

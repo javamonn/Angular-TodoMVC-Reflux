@@ -1,48 +1,43 @@
-(function() {
+(() => {
   'use strict';
+
+  class TodoAppController {
+
+    constructor(TodoStore, $scope) {
+      this.TodoStore = TodoStore;
+      this.$scope = $scope;
+      this.state = this.getTodoState();
+
+      TodoStore.addChangeListener(() =>  {
+        TodoStore.addChangeListener(this.onChange);
+      });
+      $scope.$on('$destroy', function() {
+        TodoStore.removeChangeLister(this.onChange);
+      });
+    }
+
+    getTodoState() {
+      return {
+        allTodos: this.TodoStore.getAll(),
+        areAllComplete: this.TodoStore.areAllComplete()
+      }
+    }
+
+    onChange() {
+      this.state = getTodoState();
+    }
+  }
+
+  let todoApp = () => ({
+    restrict: 'E',
+    replace: true,
+    templateUrl: './js/layout/todo-app.html',
+    controllerAs: 'todoApp',
+    controller: ['TodoStore', '$scope', TodoAppController]
+  });
   
   angular
     .module('app')
-    .directive('todoApp', ['TodoStore', todoApp]);
+    .directive('todoApp', [todoApp]);
 
-  function todoApp(TodoStore) {
-
-    /**
-     * Retrieve the current TODO data from the TodoStore.
-     */
-    function getTodoState() {
-      return {
-        allTodos: TodoStore.getAll(),
-        areAllComplete: TodoStore.areAllComplete()
-      };
-    }
-
-    function TodoAppController($scope) {
-
-      var onChange = function() {
-        scope.todoState = getTodoState();
-      };
-
-      /**
-       * Event handler for 'change' events coming from the TodoStore.
-       */
-      TodoStore.addChangeListener(function() {
-        TodoStore.addChangeListener(this.onChange);
-      });
-
-      scope.$on('$destroy', function() {
-        TodoStore.removeChangeLister(this.onChange);
-      });
-
-      scope.todoState = getTodoState();
-    }
-
-    return {
-      restrict: 'E',
-      replace: true,
-      templateUrl: './js/layout/todo-app.html',
-      controllerAs: 'todoApp',
-      controller: ['$scope', TodoAppController]
-    };
-  }
 })();

@@ -1,22 +1,29 @@
-(function() {
+(() => {
   'use strict';
 
-  angular
-    .module('app')
-    .directive('headerSection', ['TodoActions', HeaderSection]);
+  class HeaderSectionController {
+    contstructor(TodoActions) {
+      this.TodoActions = TodoActions;
+      this.text = "hello world";
+    }
+    onSave(text) {
+      if (text.trim()) {
+        TodoActions.create(text);
+      }
+    }
+  };
 
   function HeaderSection(TodoActions) {
     return {
       restrict: 'E',
       templateUrl: 'js/components/header-section/header-section.html',
       replace: true,
-      link: function(scope, elem, attrs) {
-        scope.onSave = function(text) {
-          if (text.trim()) {
-            TodoActions.create(text);
-          }
-        };
-      }
+      controller: ['TodoActions', HeaderSectionController],
+      controllerAs: 'mainSection'
     };
   }
+
+  angular
+    .module('app')
+    .directive('headerSection', ['TodoActions', HeaderSection]);
 })();
