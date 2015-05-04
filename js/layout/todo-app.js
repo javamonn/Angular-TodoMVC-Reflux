@@ -33,7 +33,8 @@
     replace: true,
     templateUrl: './js/layout/todo-app.html',
     controllerAs: 'todoApp',
-    controller: ['TodoStore', '$scope', TodoAppController]
+    controller: ['TodoStore', '$scope', TodoAppController],
+    bindToController: true
   });
   
   angular

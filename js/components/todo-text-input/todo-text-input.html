@@ -1,7 +1,7 @@
 <input
-  ng-model="inputValue"
-  ng-blur="saveState()"
-  ng-keydown="onKeyDown($event)"
-  placeholder="{{placeholder}}"
+  ng-model="todoText._inputValue"
+  ng-blur="todoText.saveState()"
+  ng-keydown="todoText.onKeyDown($event)"
+  placeholder="{{todoText.placeholder}}"
   autofocus></input>
   

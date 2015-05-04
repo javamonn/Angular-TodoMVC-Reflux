@@ -1,12 +1,10 @@
 (() => {
   'use strict';
 
-  class MainSectionController {
-    constructor(TodoActions) {
-      this.TodoActions = TodoActions;
-    }
+  let MainSectionController = function(TodoActions) {
+    this.TodoActions = TodoActions;
 
-    toggleCompleteAll() {
+    this.toggleCompleteAll = () => {
       TodoActions.toggelCompleteAll();
     }
   }

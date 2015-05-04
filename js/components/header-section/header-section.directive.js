@@ -1,11 +1,13 @@
 (() => {
   'use strict';
 
-  class HeaderSectionController {
-    contstructor(TodoActions) {
-      this.TodoActions = TodoActions;
-    }
-    onSave(text) {
+  let HeaderSectionController = function(TodoActions) {
+   
+    this.TodoActions = TodoActions;
+    this.placeholder = "test placeholder text";
+
+    this.onSave = text => {
+      console.log('header section save state');
       if (text.trim()) {
         this.TodoActions.create(text);
       }
@@ -14,12 +16,14 @@
 
   let HeaderSection = () => ({
     restrict: 'E',
-    templateUrl: 'js/components/header-section/header-section.html',
+    templateUrl: './js/components/header-section/header-section.html',
     controller: ['TodoActions', HeaderSectionController],
-    controllerAs: 'mainSection'
+    controllerAs: 'headerSection',
+    bindToController: true,
+    replace: true
   });
 
   angular
     .module('app')
-    .directive('headerSection', ['TodoActions', HeaderSection]);
+    .directive('headerSection', [HeaderSection]);
 })();
