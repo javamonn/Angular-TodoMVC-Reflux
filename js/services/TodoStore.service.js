@@ -1,117 +1,67 @@
-(function() {
+(() => {
   'use strict';
+
+  var TodoRecord = Record({
+    id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
+    complete: false,
+    text: "Experiment with Angular and Reflux"
+  });
+
+  let TodoStore = function(TodoActions) {
+
+    let onCreate = text => {
+      this._todos = this._todos.push(new TodoRecord({text}));
+      this.trigger(this._todos);
+    };
+
+    let onUpdateText = id, text => {
+      var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+      this._todos = this._todos.set(index, todo.set({text}));
+     this.trigger(this._todos); 
+    };
+
+    let onToggleComplete = id => {
+      var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+      this._todos = this._todos.set(index, todo.set({complete: !todo.complete}))
+      this.trigger(this._todos);
+    };
+
+    let onToggleCompleteAll = checked => {
+      this._todos = this._todos.map(todo => todo.set({complete: checked}));
+      this.trigger(this._todos);
+    };
+
+    let onDestroy = id => {
+      var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+      this._todos = this._todos.delete(index);
+      this.trigger(this._todos);
+    };
+
+    let onDestroyCompleted = () => {
+      this._todos = this._todos.filter(todo => !todo.complete);
+      this.trigger(this._todos);
+    };
+
+    let getInitialState = () => {
+      this._todos = Immutable.List({
+        new TodoRecord()
+      });
+      return this._todos;
+    }
+
+    return Reflux.createStore({
+      listenables: [TodoActions],
+      onCreate,
+      onUpdateText,
+      onToggleComplete,
+      onToggleCompleteAll,
+      onDestroy,
+      onDestroyCompleted,
+      getInitialState
+    });
+  };
 
   angular
     .module('app')
-    .service('TodoStore', ['$rootScope', 'TodoDispatcher', 'TodoConstants', TodoStore]);
-
-  var CHANGE_EVENT = 'change';
-
-  var _todos = {};
-
-  function create(text) {
-    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    _todos[id] = {
-      id: id,
-      complete: false,
-      text: text
-    }
-  }
-
-  function update(id, update) {
-    _todos[id] = R.merge(_todos[id], update);
-  }
-
-  function updateAll(updates) {
-    _todos.forEach(function(todo) {
-      update(todo.id, updates);
-    });
-  }
-
-  function destroy(id) {
-    delete _todos[id];
-  }
-
-  function destroyCompleted() {
-    _todos.forEach(function(todo) {
-      if (todo.complete) {
-        destroy(todo.id);
-      }
-    });
-  }
-
-  function TodoStore($rootScope, TodoDispatcher, TodoConstants) {
-    TodoDispatcher.register(function(action) {
-      var text;
-      switch(action.actionType) {
-        case TodoConstants.TODO_CREATE:
-          text = action.text.trim();
-          if (text != '') {
-            create(text);
-            TodoStore.emitChange(CHANGE_EVENT);
-          }
-          break;
-        case TodoConstants.TODO_TOGGLE_COMPLETE_ALL:
-          if (TodoStore.areAllComplete()) {
-            updateAll({complete: 'false'});
-          }
-          else {
-            updateAll({complete: 'true'});
-          }
-          TodoStore.emitChange(CHANGE_EVENT);
-          break;
-        case TodoConstants.TODO_UNDO_COMPLETE:
-          update(action.id, {complete: 'false'});
-          TodoStore.emitChange(CHANGE_EVENT);
-          break;
-        case TodoConstants.TODO_COMPLETE:
-          update(action.id, {complete: 'true'});
-          TodoStore.emitChange(CHANGE_EVENT);
-          break;
-        case TodoConstants.TODO_UPDATE_TEXT:
-          text = action.text.trim();
-          if (text != '') {
-            update(action.id, {text: text});
-            TodoStore.emitChange(CHANGE_EVENT);
-          }
-          break;
-        case TodoConstants.TODO_DESTROY:
-          destroy(action.id);
-          TodoStore.emitChange(CHANGE_EVENT);
-          break;
-        case TodoConstants.TODO_DESTROY_COMPLETED:
-          destroyCompleted();
-          TodoStore.emitChange(CHANGE_EVENT);
-          break;
-        default:
-          // nop
-      }
-    });
-
-    var registeredListeners = [];
-
-    return {
-      areAllComplete: function() {
-        R.all(function(todo) {
-          return todo.complete;
-        }, _todos);
-      },
-      getAll: function() {
-        return _todos;
-      },
-      emitChange: function() {
-        $rootScope.$emit(CHANGE_EVENT); 
-      },
-      addChangeListener: function(callback) {
-        registeredListeners.push($rootScope.$on(CHANGE_EVENT, callback));
-      },
-      removeChangeListener: function(callback) {
-        var fn = R.find(callback, registeredListeners);
-        if (fn) {
-          fn();
-        }
-      }
-    };
-  }
-
+    .service('TodoStore', ['TodoActions', TodoStore]);
 })();

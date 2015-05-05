@@ -19,7 +19,8 @@ gulp.task('build', ['clean'], function() {
     './node_modules/angular/angular.js',
     './node_modules/immutable/dist/immutable.js',
     './node_modules/ramda/dist/ramda.js',
-    './node_modules/traceur/bin/traceur-runtime.js'
+    './node_modules/traceur/bin/traceur-runtime.js',
+    './node_modules/reflux/reflux.js'
   ]))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('./js'));
