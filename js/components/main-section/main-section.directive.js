@@ -5,7 +5,7 @@
     this.TodoActions = TodoActions;
 
     this.toggleCompleteAll = () => {
-      TodoActions.toggelCompleteAll();
+      this.TodoActions.toggleCompleteAll(true);
     }
   }
 

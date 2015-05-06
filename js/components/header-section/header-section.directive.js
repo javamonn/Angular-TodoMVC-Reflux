@@ -8,10 +8,11 @@
 
     this.onSave = text => {
       console.log('header section save state');
-      if (text.trim()) {
+      text = text.trim();
+      if (text.length > 0) {
         this.TodoActions.create(text);
       }
-    }
+    };
   };
 
   let HeaderSection = () => ({

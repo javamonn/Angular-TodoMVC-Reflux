@@ -1,32 +1,15 @@
-(() => {
+(function() {
   'use strict';
 
-  class TodoAppController {
+  let TodoAppController = function(TodoStore, $scope) {
+    this.TodoStore = TodoStore;
+    this.$scope = $scope;
+    this.todos = this.TodoStore.getInitialState();
 
-    constructor(TodoStore, $scope) {
-      this.TodoStore = TodoStore;
-      this.$scope = $scope;
-      this.state = this.getTodoState();
-
-      TodoStore.addChangeListener(() =>  {
-        TodoStore.addChangeListener(this.onChange);
-      });
-      $scope.$on('$destroy', function() {
-        TodoStore.removeChangeLister(this.onChange);
-      });
-    }
-
-    getTodoState() {
-      return {
-        allTodos: this.TodoStore.getAll(),
-        areAllComplete: this.TodoStore.areAllComplete()
-      }
-    }
-
-    onChange() {
-      this.state = getTodoState();
-    }
-  }
+    TodoStore.listen(todos => {
+      this.todos = todos;
+    });
+  };
 
   let todoApp = () => ({
     restrict: 'E',
