@@ -9,37 +9,36 @@
 
   let TodoStore = function(TodoActions) {
 
-    let onCreate = text => {
-      this._todos = this._todos.push(new TodoRecord({text}));
+    let updateTodos = todos => {
+      this._todos = todos;
       this.trigger(this._todos);
+    };
+
+    let onCreate = text => {
+      updateTodos(this._todos.push(new TodoRecord({text})));
     };
 
     let onUpdateText = id, text => {
       var [index, todo] = this._todos.findEntry(todo => todo.id == id);
-      this._todos = this._todos.set(index, todo.set({text}));
-     this.trigger(this._todos); 
+      udpateTodos(this._todos.set(index, todo.set({text})))
     };
 
     let onToggleComplete = id => {
       var [index, todo] = this._todos.findEntry(todo => todo.id == id);
-      this._todos = this._todos.set(index, todo.set({complete: !todo.complete}))
-      this.trigger(this._todos);
+      updateTodos(this._todos.set(index, todo.set({complete: !todo.complete})));
     };
 
     let onToggleCompleteAll = checked => {
-      this._todos = this._todos.map(todo => todo.set({complete: checked}));
-      this.trigger(this._todos);
+      updateTodos(this._todos.map(todo => todo.set({complete: checked})));
     };
 
     let onDestroy = id => {
       var [index, todo] = this._todos.findEntry(todo => todo.id == id);
-      this._todos = this._todos.delete(index);
-      this.trigger(this._todos);
+      updateTodos(this._todos.delete(index));
     };
 
     let onDestroyCompleted = () => {
-      this._todos = this._todos.filter(todo => !todo.complete);
-      this.trigger(this._todos);
+      updateTodos(this._todos.filter(todo => !todo.complete));
     };
 
     let getInitialState = () => {
