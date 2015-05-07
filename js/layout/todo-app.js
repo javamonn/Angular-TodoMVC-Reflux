@@ -15,7 +15,7 @@
     restrict: 'E',
     replace: true,
     templateUrl: './js/layout/todo-app.html',
-    controllerAs: 'todoApp',
+    controllerAs: 'app',
     controller: ['TodoStore', '$scope', TodoAppController],
     bindToController: true
   });

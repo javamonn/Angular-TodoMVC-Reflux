@@ -7,18 +7,19 @@
     this.toggleCompleteAll = () => {
       this.TodoActions.toggleCompleteAll(true);
     }
+    console.log(this.todos.values());
   }
 
   let MainSection = () => ({
     restrict: 'E',
     templateUrl: './js/components/main-section/main-section.html',
     scope: {
-      allTodos: '=',
-      areAllComplete:'='
+      todos: '=',
     },
     controllerAs: 'mainSection',
     controller: ['TodoActions', MainSectionController],
-    bindToController: true
+    bindToController: true,
+    replace: true
   });
 
   angular

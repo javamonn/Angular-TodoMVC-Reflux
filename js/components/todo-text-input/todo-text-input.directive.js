@@ -4,7 +4,6 @@
   let TodoTextInputController = function($scope) {
     this._inputValue = this._inputValue || '';
     this.onSave = this.onSave();
-    console.log(this.onSave('test text'));
     
     this.saveState = () => {
       this.onSave(this._inputValue);

@@ -6,6 +6,6 @@
   </input>
   <label for="toggle-all">Mark all as complete</label>
   <ul id="todo-list">
-    <todo-item todo="todo" ng-repeat="todo in allTodos"></todo-item>
+    <todo-item todo="todo" ng-repeat="todo in mainSection.todos.toArray()"></todo-item>
   </ul>
 </section>
