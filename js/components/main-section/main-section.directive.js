@@ -7,7 +7,6 @@
     this.toggleCompleteAll = () => {
       this.TodoActions.toggleCompleteAll(true);
     }
-    console.log(this.todos.values());
   }
 
   let MainSection = () => ({

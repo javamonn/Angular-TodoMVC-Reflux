@@ -15,14 +15,14 @@
       },
       onUpdateText:function(id, text) {
         var [index, todo] = this._todos.findEntry(todo => todo.id == id);
-        this.updateTodos(this._todos.set(index, todo.set({text})))
+        this.updateTodos(this._todos.set(index, todo.set("text", text)))
       },
       onToggleComplete: function(id) {
         var [index, todo] = this._todos.findEntry(todo => todo.id == id);
-        this.updateTodos(this._todos.set(index, todo.set({complete: !todo.complete})));
+        this.updateTodos(this._todos.set(index, todo.set("complete", !todo.complete)));
       }, 
       onToggleCompleteAll: function(checked) {
-        this.updateTodos(this._todos.map(todo => todo.set({complete: checked})));
+        this.updateTodos(this._todos.map(todo => todo.set("complete", checked)));
       },
       onDestroy: function(id) {
         var [index, todo] = this._todos.findEntry(todo => todo.id == id);
