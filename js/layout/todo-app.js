@@ -8,6 +8,7 @@
 
     TodoStore.listen(todos => {
       this.todos = todos;
+      this.$scope.$apply();
     });
   };
 
