@@ -2,10 +2,10 @@
   'use strict';
 
   let TodoTextInputController = function($scope) {
-    this._inputValue = this._inputValue || '';
-    this.onSave = this.onSave();
+    this._inputValue = this.value || '';
+    this._onSave = this.onSave();
     
-    this.saveState = () => {
+    this._saveState = () => {
       this.onSave(this._inputValue);
       this._inputValue = '';
     };
@@ -24,10 +24,11 @@
     replace: true,
     scope: {
       placeholder: '@',
+      value: '@',
       onSave: '&'
     },
     controller: ['$scope', TodoTextInputController],
-    controllerAs: 'todoText',
+    controllerAs: 'TodoText',
     bindToController: true
   });
 
