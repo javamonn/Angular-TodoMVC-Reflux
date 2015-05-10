@@ -1,10 +1,4 @@
 <section id="main">
-  <input id="toggle-all"
-    type="checkbox"
-    ng-change="mainSection.toggleCompleteAll()"
-    ng-model="mainSection.areAllComplete">
-  </input>
-  <label for="toggle-all">Mark all as complete</label>
   <ul id="todo-list">
     <todo-item todo="todo" ng-repeat="todo in mainSection.todos.toArray()"></todo-item>
   </ul>

@@ -5,9 +5,11 @@
     this.TodoStore = TodoStore;
     this.$scope = $scope;
     this.todos = this.TodoStore.getInitialState();
+    this.areAllComplete = false;
 
     TodoStore.listen(todos => {
       this.todos = todos;
+      this.areAllComplete = this.TodoStore.areAllComplete();
       this.$scope.$apply();
     });
   };

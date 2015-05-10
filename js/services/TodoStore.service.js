@@ -37,6 +37,9 @@
         ]);
         return this._todos;
       },
+      areAllComplete: function() {
+        return this._todos.every(todo => todo.complete)
+      },
       updateTodos: function(todos) {
         this._todos = todos;
         this.trigger(this._todos);
