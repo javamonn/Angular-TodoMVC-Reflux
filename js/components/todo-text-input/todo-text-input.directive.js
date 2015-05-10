@@ -6,13 +6,13 @@
     this._onSave = this.onSave();
     
     this._saveState = () => {
-      this.onSave(this._inputValue);
+      this._onSave(this._inputValue);
       this._inputValue = '';
     };
 
     this.onKeyDown = event => {
       if (event.keyCode == 13) {
-        this.saveState();
+        this._saveState();
       }
     };
   };

@@ -1,15 +1,16 @@
 (() => {
   'use strict';
 
-  let TodoItemController = function(TodoActions) {
+  let TodoItemController = function(TodoActions, $scope) {
     this.TodoActions = TodoActions;
 
     this._onDestroyClick = () => {
       this.TodoActions.destroy(this.todo.id);
     };
 
-    this._onSave = () => {
-      this.TodoActions.updateText(this.todo.id, this._todo.text); 
+    this._onSave = text => {
+      this.TodoActions.updateText(this.todo.id, text); 
+      this._isEditing = false;
     }
 
     this._complete = arg => {
@@ -31,7 +32,7 @@
     scope: {
       todo: '='
     },
-    controller: ['TodoActions', TodoItemController],
+    controller: ['TodoActions', '$scope', TodoItemController],
     controllerAs: 'TodoItem',
     bindToController: true,
     replace: true

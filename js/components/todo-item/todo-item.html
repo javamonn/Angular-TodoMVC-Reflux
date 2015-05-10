@@ -5,6 +5,6 @@
     <button class="destroy" ng-click="TodoItem._onDestroyClick()">X</button>
   </div>
   <div ng-show="TodoItem._isEditing">
-    <todo-text-input class="edit" on-save="TodoItem._onSave"></todo-text-input>
+    <todo-text-input class="edit" on-save="TodoItem._onSave" value="{{TodoItem.todo.text}}"></todo-text-input>
   </div>
 </li>
