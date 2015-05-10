@@ -2,27 +2,27 @@
   'use strict';
 
   let TodoItemController = function(TodoActions) {
-      this.TodoActions = TodoActions;
+    this.TodoActions = TodoActions;
 
-      this._complete = arg => {
-        if (arguments.length) {
-          this.TodoActions.toggleComplete(this.todo.id);
-        } else {
-          return this.todo.complete;
-        }
-      };
+    this._onDestroyClick = () => {
+      this.TodoActions.destroy(this.todo.id);
+    };
 
-      this._onDestroyClick = () => {
-        this.TodoActions.destroy(this.todo.id);
-      };
+    this._onSave = () => {
+      this.TodoActions.updateText(this.todo.id, this._todo.text); 
+    }
 
-      this._onDoubleClick = () => {
-        this._todo.isEditing = true;
-      };
-
-      this._onSave = () => {
-        this.TodoActions.updateText(this.todo.id, this._todo.text); 
+    this._complete = arg => {
+      if (arg != undefined) {
+        this.TodoActions.toggleComplete(this.todo.id);
+      } else {
+        return this.todo.complete;
       }
+    };
+
+    this._onDoubleClick = () => {
+      this._isEditing = true;
+    };
   };
 
   let TodoItem = TodoActions => ({
