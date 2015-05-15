@@ -16,11 +16,13 @@
     "immutable": "^3.7.2"
   },
   "devDependencies": {
+    "baconjs": "^0.7.58",
     "gulp": "^3.8.11",
     "gulp-add-src": "^0.2.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.5.2",
     "gulp-traceur": "^0.17.1",
+    "jquery": "^2.1.4",
     "reflux": "^0.2.7",
     "traceur": "0.0.89"
   }

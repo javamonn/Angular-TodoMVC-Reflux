@@ -16,11 +16,13 @@ gulp.task('build', ['clean'], function() {
   ])
   .pipe(traceur())
   .pipe(add.prepend([
+    './node_modules/jquery/dist/jquery.js',
     './node_modules/angular/angular.js',
     './node_modules/immutable/dist/immutable.js',
     './node_modules/ramda/dist/ramda.js',
     './node_modules/traceur/bin/traceur-runtime.js',
-    './node_modules/reflux/dist/reflux.js'
+    './node_modules/reflux/dist/reflux.js',
+    './node_modules/baconjs/dist/Bacon.js'
   ]))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('./js'));

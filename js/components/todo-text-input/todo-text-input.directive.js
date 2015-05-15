@@ -1,22 +1,24 @@
 (() => { 
   'use strict';
 
-  let TodoTextInputController = function($scope) {
-    this._inputValue = this.value || '';
-    this._onSave = this.onSave();
-    
-    this._saveState = () => {
-      this._onSave(this._inputValue);
-      this._inputValue = '';
-    };
+  let TodoTextInputLink = function(scope, elem) {
+    let onSave = scope.onSave();
+    elem.val(scope.value ? scope.value : '');
 
-    this.onKeyDown = event => {
-      if (event.keyCode == 13) {
-        this._saveState();
-      }
-    };
+    let enterStream = elem
+      .asEventStream('keyup')
+      .filter(e => e.keyCode == 13);
+
+    let blurStream = elem
+      .asEventStream('focusout');
+
+    let inputProp = Bacon.mergeAll(enterStream, blurStream)
+      .map(() => elem.val())
+      .onValue(val => {
+        onSave(val);
+        elem.val('');
+      });
   };
-
 
   let TodoTextInput = () => ({
     restrict: 'E',
@@ -27,9 +29,7 @@
       value: '@',
       onSave: '&'
     },
-    controller: ['$scope', TodoTextInputController],
-    controllerAs: 'TodoText',
-    bindToController: true
+    link: TodoTextInputLink
   });
 
   angular
