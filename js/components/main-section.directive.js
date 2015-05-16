@@ -9,9 +9,17 @@
     }
   }
 
+  let MainSectionTemplate = `
+    <section id="main">
+      <ul id="todo-list">
+        <todo-item todo="todo" ng-repeat="todo in mainSection.todos.toArray()"></todo-item>
+      </ul>
+    </section>
+  `;
+
   let MainSection = () => ({
     restrict: 'E',
-    templateUrl: './js/components/main-section/main-section.html',
+    template: MainSectionTemplate,
     scope: {
       todos: '=',
     },

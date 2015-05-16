@@ -19,9 +19,26 @@
 
   };
 
+  let HeaderSectionTemplate = `
+    <section id="header-section">
+      <h1>todos</h1>
+      <header id="header">
+        <button id="toggle-all" type="checkbox"
+          ng-click="HeaderSection._toggleCompleteAll()">
+          ^
+        </button>
+        <todo-text-input 
+          id="new-todo" 
+          placeholder="What needs to get done?"
+          on-save="HeaderSection.onSave">
+        </todo-text-input>
+      </header>
+    </section>
+  `;
+
   let HeaderSection = () => ({
     restrict: 'E',
-    templateUrl: './js/components/header-section/header-section.html',
+    template: HeaderSectionTemplate,
     controller: ['TodoActions', 'TodoStore', HeaderSectionController],
     scope: {
       areAllComplete: '='

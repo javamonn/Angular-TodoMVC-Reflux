@@ -1,6 +1,10 @@
 (() => { 
   'use strict';
 
+  let TodoTextInputTemplate = `
+    <input class="todo-text-input" placeholder="{{TodoText.placeholder}}" autofocus></input>
+  `;
+
   let TodoTextInputLink = function(scope, elem) {
     let onSave = scope.onSave();
     elem.val(scope.value ? scope.value : '');
@@ -22,7 +26,7 @@
 
   let TodoTextInput = () => ({
     restrict: 'E',
-    templateUrl: './js/components/todo-text-input/todo-text-input.html',
+    template: TodoTextInputTemplate,
     replace: true,
     scope: {
       placeholder: '@',

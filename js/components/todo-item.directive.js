@@ -26,9 +26,31 @@
     };
   };
 
+  let TodoItemTemplate = `
+    <li ng-class="{'completed': TodoItem.complete, 'editing': TodoItem._isEditing}">
+      <div class="view" ng-show="!TodoItem._isEditing">
+        <input 
+          class="toggle" 
+          type="checkbox" 
+          ng-model="TodoItem._complete" 
+          ng-model-options="{getterSetter: true}">
+        </input>
+        <label ng-dblclick="TodoItem._onDoubleClick()">{{TodoItem.todo.text}}</label>
+        <button class="destroy" ng-click="TodoItem._onDestroyClick()">X</button>
+      </div>
+      <div ng-show="TodoItem._isEditing">
+        <todo-text-input 
+          class="edit" 
+          on-save="TodoItem._onSave" 
+          value="{{TodoItem.todo.text}}">
+        </todo-text-input>
+      </div>
+    </li>
+  `;
+
   let TodoItem = TodoActions => ({
     restrict: 'E',
-    templateUrl: 'js/components/todo-item/todo-item.html',
+    template: TodoItemTemplate,
     scope: {
       todo: '='
     },
