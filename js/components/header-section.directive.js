@@ -12,21 +12,12 @@
         this.TodoActions.create(text);
       }
     };
-    
-    this._toggleCompleteAll = () => {
-      this.TodoActions.toggleCompleteAll(!this.areAllComplete);
-    };
-
   };
 
   let HeaderSectionTemplate = `
-    <section id="header-section">
+    <section id="header">
       <h1>todos</h1>
-      <header id="header">
-        <button id="toggle-all" type="checkbox"
-          ng-click="HeaderSection._toggleCompleteAll()">
-          ^
-        </button>
+      <header id="header-input">
         <todo-text-input 
           id="new-todo" 
           placeholder="What needs to get done?"
