@@ -5,7 +5,8 @@
     this.TodoActions = TodoActions;
 
     this._toggleCompleteAll = () => {
-      this.TodoActions.toggleCompleteAll(true);
+      let areAllComplete = this.todos.every(todo => todo.complete);
+      this.TodoActions.toggleCompleteAll(!areAllComplete);
     }
   }
 

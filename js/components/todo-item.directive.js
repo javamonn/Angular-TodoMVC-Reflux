@@ -27,7 +27,7 @@
   };
 
   let TodoItemTemplate = `
-    <li ng-class="{'completed': TodoItem.complete, 'editing': TodoItem._isEditing}">
+    <li ng-class="{'completed': TodoItem._complete(), 'editing': TodoItem._isEditing}">
       <div class="view" ng-show="!TodoItem._isEditing">
         <input 
           class="toggle" 

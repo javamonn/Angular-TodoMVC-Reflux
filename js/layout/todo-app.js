@@ -9,7 +9,6 @@
 
     TodoStore.listen(todos => {
       this.todos = todos;
-      this.areAllComplete = this.TodoStore.areAllComplete();
       this.$scope.$apply();
     });
   };
