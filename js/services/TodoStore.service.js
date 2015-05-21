@@ -11,21 +11,24 @@
     return Reflux.createStore({
       listenables: [TodoActions],
       onCreate: function(text) {
-        this.updateTodos(this._todos.push(new TodoRecord({text})));
+        this.updateTodos(this._todos.push(new TodoRecord({
+          text: text,
+          id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
+        })));
       },
       onUpdateText:function(id, text) {
-        var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+        let [index, todo] = this._todos.findEntry(todo => todo.id == id);
         this.updateTodos(this._todos.set(index, todo.set("text", text)))
       },
       onToggleComplete: function(id) {
-        var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+        let [index, todo] = this._todos.findEntry(todo => todo.id == id);
         this.updateTodos(this._todos.set(index, todo.set("complete", !todo.complete)));
       }, 
       onToggleCompleteAll: function(checked) {
         this.updateTodos(this._todos.map(todo => todo.set("complete", checked)));
       },
       onDestroy: function(id) {
-        var [index, todo] = this._todos.findEntry(todo => todo.id == id);
+        let [index, todo] = this._todos.findEntry(todo => todo.id == id);
         this.updateTodos(this._todos.delete(index));
       },
       onDestroyCompleted: function() {

@@ -2,7 +2,7 @@
   'use strict';
 
   let TodoTextInputTemplate = `
-    <input class="todo-text-input" placeholder="{{TodoText.placeholder}}" autofocus></input>
+    <input class="todo-text-input" placeholder="{{TodoText.placeholder}}"></input>
   `;
 
   let TodoTextInputLink = function(scope, elem) {
@@ -14,13 +14,13 @@
       .filter(e => e.keyCode == 13);
 
     let blurStream = elem
-      .asEventStream('focusout');
+      .asEventStream('blur');
 
     let inputProp = Bacon.mergeAll(enterStream, blurStream)
       .map(() => elem.val())
       .onValue(val => {
-        onSave(val);
         elem.val('');
+        onSave(val);
       });
   };
 

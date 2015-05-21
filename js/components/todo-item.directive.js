@@ -9,7 +9,9 @@
     };
 
     this._onSave = text => {
-      this.TodoActions.updateText(this.todo.id, text); 
+      if (text.length > 0) {
+        this.TodoActions.updateText(this.todo.id, text); 
+      }
       this._isEditing = false;
     }
 
@@ -20,11 +22,16 @@
         return this.todo.complete;
       }
     };
-
-    this._onDoubleClick = () => {
-      this._isEditing = true;
-    };
   };
+
+  let TodoItemLink = function(scope, elem) {
+    elem.find('.todo-text')
+      .asEventStream('dblclick')
+      .onValue(() => {
+        scope.$apply(scope.TodoItem._isEditing = true);
+        elem.find('.todo-text-input').focus();
+      });
+  }
 
   let TodoItemTemplate = `
     <li ng-class="{'completed': TodoItem._complete(), 'editing': TodoItem._isEditing}">
@@ -35,10 +42,10 @@
           ng-model="TodoItem._complete" 
           ng-model-options="{getterSetter: true}">
         </input>
-        <label ng-dblclick="TodoItem._onDoubleClick()">{{TodoItem.todo.text}}</label>
-        <button class="destroy" ng-click="TodoItem._onDestroyClick()">X</button>
+        <label class="todo-text" >{{TodoItem.todo.text}}</label>
+        <button class="destroy" ng-click="TodoItem._onDestroyClick()"></button>
       </div>
-      <div ng-show="TodoItem._isEditing">
+      <div ng-if="TodoItem._isEditing">
         <todo-text-input 
           class="edit" 
           on-save="TodoItem._onSave" 
@@ -55,6 +62,7 @@
       todo: '='
     },
     controller: ['TodoActions', '$scope', TodoItemController],
+    link: TodoItemLink,
     controllerAs: 'TodoItem',
     bindToController: true,
     replace: true
