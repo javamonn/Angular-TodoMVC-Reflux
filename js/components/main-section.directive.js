@@ -1,24 +1,44 @@
 (() => {
   'use strict';
 
-  let MainSectionController = function(TodoActions) {
-    this.TodoActions = TodoActions;
-
-    this._toggleCompleteAll = () => {
-      let areAllComplete = this.todos.every(todo => todo.complete);
-      this.TodoActions.toggleCompleteAll(!areAllComplete);
-    }
-  }
-
   let MainSectionTemplate = `
     <section id="main">
         <input id="toggle-all" type="checkbox" ng-click="mainSection._toggleCompleteAll()" />
         <label for="toggle-all">Mark all as complete</label>
       <ul id="todo-list">
-        <todo-item todo="todo" ng-repeat="todo in mainSection.todos.toArray()"></todo-item>
+        <todo-item todo="todo" ng-repeat="todo in mainSection.todos | footerFilter:mainSection._filterState"></todo-item>
       </ul>
     </section>
   `;
+
+
+  let MainSectionController = function(TodoActions, StateActions, $scope) {
+    this.TodoActions = TodoActions;
+    this._filterState = 'all'
+
+    StateActions.filter.listen(filter => {
+      this._filterState = filter;
+      $scope.$apply();
+    });
+
+    this._toggleCompleteAll = () => {
+      let areAllComplete = this.todos.every(todo => todo.complete);
+      this.TodoActions.toggleCompleteAll(!areAllComplete);
+    };
+  }
+
+  let FooterFilter = function() {
+    return (todos, filterState) => {
+      switch(filterState) {
+        case 'all':
+          return todos.toArray();
+        case 'active':
+          return todos.filterNot(todo => todo.complete).toArray();
+        case 'completed':
+          return todos.filter(todo => todo.complete).toArray();
+      }
+    }
+  };
 
   let MainSection = () => ({
     restrict: 'E',
@@ -27,13 +47,13 @@
       todos: '=',
     },
     controllerAs: 'mainSection',
-    controller: ['TodoActions', MainSectionController],
+    controller: ['TodoActions', 'StateActions', '$scope', MainSectionController],
     bindToController: true,
     replace: true
   });
 
   angular
     .module('app')
+    .filter('footerFilter', [FooterFilter])
     .directive('mainSection', [MainSection]);
-
 })();
