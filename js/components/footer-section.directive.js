@@ -2,17 +2,17 @@
   'use strict';
   
   let FooterSectionTemplate = `
-    <footer id="footer">
-      <span id="todo-count">
+    <footer class="footer">
+      <span class="todo-count">
         {{FooterSection.notCompletedCount()}} {{FooterSection.notCompletedCount() == 1 ? 'todo' : 'todos'}} left
       </span>
-      <ul id="filters">
-        <li><a ng-click="FooterSection._filter('all')">All</a></li>
-        <li><a ng-click="FooterSection._filter('active')">Active</a></li>
-        <li><a ng-click="FooterSection._filter('completed')">Completed</a></li>
+      <ul class="filters">
+        <li><a href ng-class="{selected: FooterSection._filterState == 'all'}" ng-click="FooterSection._filter('all')">All</a></li>
+        <li><a href ng-class="{selected: FooterSection._filterState == 'active'}" ng-click="FooterSection._filter('active')">Active</a></li>
+        <li><a href ng-class="{selected: FooterSection._filterState == 'completed'}" ng-click="FooterSection._filter('completed')">Completed</a></li>
       </ul>
       <button 
-        id="clear-completed"
+        class="clear-completed"
         ng-click="FooterSection._clearCompleted()"
         ng-show="FooterSection.completedCount() >= 1">
         Clear Completed ({{FooterSection.completedCount()}})
@@ -23,6 +23,7 @@
   let FooterSectionController = function(TodoActions, StateActions) {
     this.TodoActions = TodoActions;
     this.StateActions = StateActions;
+    this._filterState = 'all';
     this.completedCount = () => this.todos.count(todo => todo.complete);
     this.notCompletedCount = () => this.todos.count(todo => !todo.complete);
     this._clearCompleted = () => {
@@ -30,6 +31,7 @@
     };
 
     this._filter = filterLabel => {
+      this._filterState = filterLabel
       StateActions.filter(filterLabel);
     };
   };

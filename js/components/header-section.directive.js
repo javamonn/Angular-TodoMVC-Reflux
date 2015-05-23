@@ -15,11 +15,11 @@
   };
 
   let HeaderSectionTemplate = `
-    <section id="header">
+    <section class="header">
       <h1>todos</h1>
-      <header id="header-input">
+      <header class="header-input">
         <todo-text-input 
-          id="new-todo" 
+          class="new-todo" 
           placeholder="What needs to get done?"
           on-save="HeaderSection.onSave">
         </todo-text-input>
