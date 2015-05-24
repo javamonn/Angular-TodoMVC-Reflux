@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  var TodoRecord = Immutable.Record({
+  const TodoRecord = Immutable.Record({
     id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
     complete: false,
     text: "Experiment with Angular and Reflux"
   });
 
-  let TodoStore = function(TodoActions) {
+  let TodoStore = function(TodoActions, PersistStore) {
     return Reflux.createStore({
       listenables: [TodoActions],
       onCreate: function(text) {
@@ -34,20 +34,18 @@
       onDestroyCompleted: function() {
         this.updateTodos(this._todos.filter(todo => !todo.complete));
       },
-      getInitialState: function() {
-        this._todos = Immutable.List([
-          new TodoRecord()
-        ]);
-        return this._todos;
-      },
       updateTodos: function(todos) {
         this._todos = todos;
         this.trigger(this._todos);
+        PersistStore.update(todos);
+      },
+      initialize: function() {
+        return PersistStore.initialize().then(this.updateTodos);
       }
     });
   };
 
   angular
     .module('app')
-    .service('TodoStore', ['TodoActions', TodoStore]);
+    .service('TodoStore', ['TodoActions', 'PersistStore', TodoStore]);
 })();

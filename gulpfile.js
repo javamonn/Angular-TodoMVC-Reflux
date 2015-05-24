@@ -22,7 +22,8 @@ gulp.task('build', ['clean'], function() {
     './node_modules/ramda/dist/ramda.js',
     './node_modules/traceur/bin/traceur-runtime.js',
     './node_modules/reflux/dist/reflux.js',
-    './node_modules/baconjs/dist/Bacon.js'
+    './node_modules/baconjs/dist/Bacon.js',
+    './node_modules/pouchdb/dist/pouchdb.js'
   ]))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('./js'));
