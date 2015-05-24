@@ -11,8 +11,10 @@ gulp.task('build', ['clean'], function() {
 
   return gulp.src([
     './js/app.module.js',
-    './js/app.constants.js',
-    './js/**/*.js'
+    './js/services/**/*.js',
+    './js/components/**/*.js',
+    './js/layout/**/*.js',
+    './js/app.routes.js'
   ])
   .pipe(traceur())
   .pipe(add.prepend([
@@ -23,7 +25,8 @@ gulp.task('build', ['clean'], function() {
     './node_modules/traceur/bin/traceur-runtime.js',
     './node_modules/reflux/dist/reflux.js',
     './node_modules/baconjs/dist/Bacon.js',
-    './node_modules/pouchdb/dist/pouchdb.js'
+    './node_modules/pouchdb/dist/pouchdb.js',
+    './node_modules/angular-ui-router/release/angular-ui-router.js'
   ]))
   .pipe(concat('app.js'))
   .pipe(gulp.dest('./js'));

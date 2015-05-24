@@ -13,7 +13,6 @@
 
   let PersistStore = $q =>({
     update: function(todos) {
-      console.log(_todoListRev);
       let promise = db.put({
         todos: todos.toJS(),
         _id: _todoListId,

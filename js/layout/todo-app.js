@@ -1,29 +1,20 @@
 (function() {
   'use strict';
 
-  let TodoAppController = function(TodoStore, $scope) {
+  let TodoAppController = function(TodoStore, $scope, todos) {
     this.TodoStore = TodoStore;
     this.$scope = $scope;
+    this.todos = todos;
     this.areAllComplete = false;
 
     TodoStore.listen(todos => {
       this.todos = todos;
       this.$scope.$apply();
     });
-    this.todos = TodoStore.initialize();
   };
-
-  let todoApp = () => ({
-    restrict: 'E',
-    replace: true,
-    templateUrl: './js/layout/todo-app.html',
-    controllerAs: 'app',
-    controller: ['TodoStore', '$scope', TodoAppController],
-    bindToController: true
-  });
   
   angular
     .module('app')
-    .directive('todoApp', [todoApp]);
+    .controller('TodoApp', ['TodoStore', '$scope', 'todos', TodoAppController]);
 
 })();

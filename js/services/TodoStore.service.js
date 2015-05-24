@@ -40,7 +40,11 @@
         PersistStore.update(todos);
       },
       initialize: function() {
-        return PersistStore.initialize().then(this.updateTodos);
+        return PersistStore.initialize()
+          .then(todos => {
+             this._todos = todos;
+             return todos;
+          });
       }
     });
   };
