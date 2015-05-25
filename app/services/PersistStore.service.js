@@ -3,7 +3,7 @@
 
   const db = new PouchDB('TodoMVC');
   const TodoRecord = Immutable.Record({
-    id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
+    id: cuid,
     complete: false,
     text: "Experiment with Angular and Reflux"
   });
@@ -11,20 +11,18 @@
   const _todoListId = 'todoList';
   let _todoListRev = '';
 
-  let PersistStore = $q =>({
+  let PersistStore = () =>({
     update: function(todos) {
-      let promise = db.put({
+       return db.put({
         todos: todos.toJS(),
         _id: _todoListId,
         _rev: _todoListRev
       }).then(res => {
         _todoListRev = res.rev;
       });
-      //return $q.when(promise);
-      return promise;
     },
     initialize: function() {
-      let promise = db.info()
+      return db.info()
       .then(info => {
         if (info.doc_count > 0) {
           return db.get(_todoListId).then(mutableTodoList => {
@@ -46,13 +44,11 @@
           });
         }
       });
-      //return $q.when(promise);
-      return promise;
     }
   });
 
   angular
     .module('app')
-    .service('PersistStore', ['$q', PersistStore])
+    .service('PersistStore', [PersistStore])
 
 })();

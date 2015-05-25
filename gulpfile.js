@@ -28,6 +28,7 @@ gulp.task('build', ['clean'], function() {
     './node_modules/reflux/dist/reflux.js',
     './node_modules/baconjs/dist/Bacon.js',
     './node_modules/pouchdb/dist/pouchdb.js',
+    './node_modules/cuid/dist/browser-cuid.js',
     './node_modules/angular-ui-router/release/angular-ui-router.js'
   ]))
   .pipe(concat('app.js'))

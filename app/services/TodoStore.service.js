@@ -2,7 +2,7 @@
   'use strict';
 
   const TodoRecord = Immutable.Record({
-    id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
+    id: cuid(),
     complete: false,
     text: "Experiment with Angular and Reflux"
   });
@@ -13,7 +13,7 @@
       onCreate: function(text) {
         this.updateTodos(this._todos.push(new TodoRecord({
           text: text,
-          id: (+new Date() + Math.floor(Math.random() * 999999)).toString(36),
+          id: cuid(),
         })));
       },
       onUpdateText:function(id, text) {
