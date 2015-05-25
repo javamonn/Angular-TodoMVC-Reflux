@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
 var clean = require('gulp-clean');
-var traceur = require('gulp-traceur');
+var babel = require('gulp-babel');
 var add = require('gulp-add-src');
 var rename = require('gulp-rename');
 var gls = require('gulp-live-server');
@@ -19,13 +19,12 @@ gulp.task('build', ['clean'], function() {
     './app/layout/**/*.js',
     './app/routes.js'
   ])
-  .pipe(traceur())
+  .pipe(babel())
   .pipe(add.prepend([
     './node_modules/jquery/dist/jquery.js',
     './node_modules/angular/angular.js',
     './node_modules/immutable/dist/immutable.js',
     './node_modules/ramda/dist/ramda.js',
-    './node_modules/traceur/bin/traceur-runtime.js',
     './node_modules/reflux/dist/reflux.js',
     './node_modules/baconjs/dist/Bacon.js',
     './node_modules/pouchdb/dist/pouchdb.js',
@@ -49,7 +48,7 @@ gulp.task('styles', function() {
 
 /********************************************************/
 
-gulp.task('test', function(done) {
+gulp.task('test', ['build'], function(done) {
   return karma.start({
     configFile: require('path').resolve('karma.conf.js'),
     singleRun: true

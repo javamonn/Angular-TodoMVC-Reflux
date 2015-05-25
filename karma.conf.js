@@ -10,7 +10,11 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'phantomjs-shim'],
+
+    plugins: ['karma-phantomjs-launcher', 'karma-phantomjs-shim', 'karma-jasmine'],
+
+    browsers: ['PhantomJS'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -56,7 +60,6 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode
