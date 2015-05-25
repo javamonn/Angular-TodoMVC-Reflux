@@ -50,17 +50,21 @@ gulp.task('styles', function() {
 /********************************************************/
 
 gulp.task('test', function(done) {
-  karma.start({
-    config: 'spec/karma.conf.js',
+  return karma.start({
+    configFile: require('path').resolve('karma.conf.js'),
     singleRun: true
-  }, done);
+  }, function() {
+    done(); 
+  });
 });
 
 gulp.task('develop', ['build', 'styles'], function(done) {
+  return karma.start({
+    configFile: require('path').resolve('karma.conf.js')
+  }, function() {
+    done(); 
+  });
   gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
-  karma.start({
-    config: 'spec/karma.conf.js'
-  }, done);
 });
 
 gulp.task('serve', ['build', 'styles'], function() {
