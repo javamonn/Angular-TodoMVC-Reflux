@@ -5,6 +5,7 @@ var traceur = require('gulp-traceur');
 var add = require('gulp-add-src');
 var rename = require('gulp-rename');
 var gls = require('gulp-live-server');
+var karma = require('karma').server;
 
 /**
  * Minify and concat component files into a file included by the index.
@@ -44,13 +45,27 @@ gulp.task('styles', function() {
   return gulp.src('node_modules/todomvc-app-css/index.css')
     .pipe(rename('app.css'))
     .pipe(gulp.dest('./app/_build'));
-})
+});
+
+/********************************************************/
+
+gulp.task('test', function(done) {
+  karma.start({
+    config: 'spec/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
+gulp.task('develop', ['build', 'styles'], function(done) {
+  gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
+  karma.start({
+    config: 'spec/karma.conf.js'
+  }, done);
+});
 
 gulp.task('serve', ['build', 'styles'], function() {
   var server = gls.static('app', process.env.PORT || 8000);
   server.start();
-
-  gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
 });
 
 gulp.task('default', ['serve']);

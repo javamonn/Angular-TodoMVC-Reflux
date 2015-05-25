@@ -1,8 +1,10 @@
 # todo-angular-flux
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 
 ## Running
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 You must have [npm](https://www.npmjs.org/) installed on your computer.
 From the root project directory run these commands from the command line:
