@@ -46,7 +46,7 @@ gulp.task('styles', function() {
 })
 
 gulp.task('serve', ['build', 'styles'], function() {
-  var server = gls.static('app', 8000);
+  var server = gls.static('app', process.env.PORT || 8000);
   server.start();
 
   gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
