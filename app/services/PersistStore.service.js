@@ -3,7 +3,7 @@
 
   const db = new PouchDB('TodoMVC');
   const TodoRecord = Immutable.Record({
-    id: cuid,
+    id: cuid(),
     complete: false,
     text: "Experiment with Angular and Reflux"
   });
