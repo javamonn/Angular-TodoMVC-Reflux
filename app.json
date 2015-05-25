@@ -12,7 +12,7 @@
   "repository": "https://github.com/javamonn/todo-angular-flux",
   "env": {
     "WEB_CONCURRENCY": {
-      "processes": 1
+      "value": "1"
     }
   }
 }
