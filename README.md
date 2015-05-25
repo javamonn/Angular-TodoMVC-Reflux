@@ -13,3 +13,5 @@ To start the project, run this command:
 
     npm start
 
+Point your browser at [https://localhost:8000](https://localhost:8000) to
+view the project.
