@@ -20,9 +20,7 @@
     "gulp-rename": "^1.2.2",
     "immutable": "^3.7.2",
     "pouchdb": "^3.5.0",
-    "todomvc-app-css": "^2.0.1"
-  },
-  "devDependencies": {
+    "todomvc-app-css": "^2.0.1",
     "baconjs": "^0.7.58",
     "gulp": "^3.8.11",
     "gulp-add-src": "^0.2.0",
