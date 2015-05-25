@@ -6,7 +6,7 @@
     $urlRouterProvider.otherwise('/');
     $stateProvider
       .state('app', {
-        templateUrl: './js/layout/todo-app.html',
+        templateUrl: './layout/todo-app.html',
         controller: 'TodoApp',
         controllerAs: 'app',
         url: '/',

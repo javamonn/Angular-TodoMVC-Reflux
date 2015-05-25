@@ -3,6 +3,8 @@ var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var traceur = require('gulp-traceur');
 var add = require('gulp-add-src');
+var rename = require('gulp-rename');
+var gls = require('gulp-live-server');
 
 /**
  * Minify and concat component files into a file included by the index.
@@ -10,11 +12,11 @@ var add = require('gulp-add-src');
 gulp.task('build', ['clean'], function() {
 
   return gulp.src([
-    './js/app.module.js',
-    './js/services/**/*.js',
-    './js/components/**/*.js',
-    './js/layout/**/*.js',
-    './js/app.routes.js'
+    './app/module.js',
+    './app/services/**/*.js',
+    './app/components/**/*.js',
+    './app/layout/**/*.js',
+    './app/routes.js'
   ])
   .pipe(traceur())
   .pipe(add.prepend([
@@ -29,16 +31,25 @@ gulp.task('build', ['clean'], function() {
     './node_modules/angular-ui-router/release/angular-ui-router.js'
   ]))
   .pipe(concat('app.js'))
-  .pipe(gulp.dest('./js'));
+  .pipe(gulp.dest('./app/_build'));
 });
 
 gulp.task('clean', function() {
-  return gulp.src(['./js/app.js'], {read: false})
+  return gulp.src(['./app/_build/app.js'], {read: false})
     .pipe(clean());
 });
 
-gulp.task('serve', ['build'], function() {
-  gulp.watch('./js/**/*.js', ['build']);
+gulp.task('styles', function() {
+  return gulp.src('node_modules/todomvc-app-css/index.css')
+    .pipe(rename('app.css'))
+    .pipe(gulp.dest('./app/_build'));
+})
+
+gulp.task('serve', ['build', 'styles'], function() {
+  var server = gls.static('app', 8000);
+  server.start();
+
+  gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
 });
 
 gulp.task('default', ['serve']);
