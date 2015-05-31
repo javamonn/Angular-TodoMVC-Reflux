@@ -58,12 +58,12 @@ gulp.task('test', ['build'], function(done) {
 });
 
 gulp.task('develop', ['build', 'styles'], function(done) {
-  return karma.start({
+  karma.start({
     configFile: require('path').resolve('karma.conf.js')
   }, function() {
     done(); 
   });
-  gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build', server.notify]);
+  return gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build']);
 });
 
 gulp.task('serve', ['build', 'styles'], function() {
