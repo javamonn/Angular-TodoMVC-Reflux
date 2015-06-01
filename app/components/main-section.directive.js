@@ -14,7 +14,7 @@
 
   let MainSectionController = function(TodoActions, StateActions, $scope) {
     this.TodoActions = TodoActions;
-    this._filterState = 'all'
+    this._filterState = 'all';
 
     StateActions.filter.listen(filter => {
       this._filterState = filter;
