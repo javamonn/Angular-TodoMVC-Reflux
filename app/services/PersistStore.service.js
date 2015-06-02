@@ -12,7 +12,7 @@
   let _todoListRev = '';
 
   let PersistStore = () =>({
-    update: function(todos) {
+    update(todos) {
        return db.put({
         todos: todos.toJS(),
         _id: _todoListId,
@@ -21,7 +21,7 @@
         _todoListRev = res.rev;
       });
     },
-    initialize: function() {
+    initialize() {
       return db.info()
       .then(info => {
         if (info.doc_count > 0) {

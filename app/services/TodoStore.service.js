@@ -13,31 +13,31 @@
 
     let todoStore = Reflux.createStore({
       listenables: [TodoActions],
-      onCreate: function(text) {
+      onCreate(text) {
         _updateTodos(_todos.push(new TodoRecord({
           text: text,
           id: cuid()
         })));
       },
-      onUpdateText:function(id, text) {
+      onUpdateText(id, text) {
         let [index, todo] = _todos.findEntry(todo => todo.id == id);
         _updateTodos(_todos.set(index, todo.set("text", text)))
       },
-      onToggleComplete: function(id) {
+      onToggleComplete(id) {
         let [index, todo] = _todos.findEntry(todo => todo.id == id);
         _updateTodos(_todos.set(index, todo.set("complete", !todo.complete)));
       }, 
-      onToggleCompleteAll: function(checked) {
+      onToggleCompleteAll(checked) {
         _updateTodos(_todos.map(todo => todo.set("complete", checked)));
       },
-      onDestroy: function(id) {
+      onDestroy(id) {
         let [index, todo] = _todos.findEntry(todo => todo.id == id);
         _updateTodos(_todos.delete(index));
       },
-      onDestroyCompleted: function() {
+      onDestroyCompleted() {
         _updateTodos(_todos.filter(todo => !todo.complete));
       },
-      initialize: function() {
+      initialize() {
         return PersistStore.initialize()
           .then(todos => {
              _todos = todos;

@@ -10,7 +10,7 @@ var karma = require('karma').server;
 /**
  * Minify and concat component files into a file included by the index.
  */
-gulp.task('build', ['clean'], function() {
+gulp.task('build', function() {
 
   return gulp.src([
     './app/module.js',
@@ -60,8 +60,6 @@ gulp.task('test', ['build'], function(done) {
 gulp.task('develop', ['build', 'styles'], function(done) {
   karma.start({
     configFile: require('path').resolve('karma.conf.js')
-  }, function() {
-    done(); 
   });
   return gulp.watch(['./app/**/*.js', '!./app/_build/**/*.js'], ['build']);
 });
