@@ -31,9 +31,6 @@
     restrict: 'E',
     template: HeaderSectionTemplate,
     controller: ['TodoActions', 'TodoStore', HeaderSectionController],
-    scope: {
-      areAllComplete: '='
-    },
     controllerAs: 'HeaderSection',
     bindToController: true
   });

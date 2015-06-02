@@ -3,8 +3,8 @@
 
   let MainSectionTemplate = `
     <section class="main">
-        <input class="toggle-all" type="checkbox" ng-click="mainSection._toggleCompleteAll()" />
-        <label for="toggle-all">Mark all as complete</label>
+      <input class="toggle-all" type="checkbox" ng-click="mainSection._toggleCompleteAll()" />
+      <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
         <todo-item todo="todo" ng-repeat="todo in mainSection.todos | footerFilter:mainSection._filterState"></todo-item>
       </ul>
