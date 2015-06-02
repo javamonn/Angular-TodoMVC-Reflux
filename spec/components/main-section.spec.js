@@ -1,8 +1,8 @@
 'use strict';
 
-describe('MainSection', function() {
+describe('MainSection', () => {
 
-  var TodoRecord = Immutable.Record({
+  const TodoRecord = Immutable.Record({
     id: cuid(),
     complete: false,
     text: "Experiment with Angular and Reflux"
@@ -11,9 +11,9 @@ describe('MainSection', function() {
   var template,
       controller;
 
-  beforeEach(function() {
+  beforeEach(() => {
     module('app');
-    inject(function($compile, $rootScope) {
+    inject(($compile, $rootScope) => {
       var $scope = $rootScope.$new();
       $rootScope.todos = Immutable.List([
         new TodoRecord({ id: cuid(), complete: true }),     
@@ -27,25 +27,23 @@ describe('MainSection', function() {
     });
   });
 
-  describe('template', function() {
-    it('contains a todo list', function() {
+  describe('template', () => {
+    it('contains a todo list', () => {
       expect(template.html()).toContain('class="todo-list"');
     });
   });
 
-  describe('controller', function() {
-    describe('._toggleCompleteAll', function() {
-      beforeEach(function() {
+  describe('controller', () => {
+    describe('._toggleCompleteAll', () => {
+      beforeEach(() => {
         spyOn(controller.TodoActions, 'toggleCompleteAll');
       });
-      it('triggers the toggleCompleteAll action', function() {
+      it('triggers the toggleCompleteAll action', () => {
         controller._toggleCompleteAll();
         expect(controller.TodoActions.toggleCompleteAll).toHaveBeenCalled();
       });
-      it('toggles all todos to the expected completion state', function() {
-        var allComplete = controller.todos.every(function(todo) {
-          return todo.complete;
-        });
+      it('toggles all todos to the expected completion state', () => {
+        var allComplete = controller.todos.every(todo => todo.complete);
         controller._toggleCompleteAll();
         expect(controller.TodoActions.toggleCompleteAll).toHaveBeenCalledWith(!allComplete);
       });
