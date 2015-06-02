@@ -23,10 +23,18 @@ Alternatively, deploy the project for free on  Heroku for a zero-configuration i
 ## Contributing
 
 - Fork it
+
 - Clone it
+    ```
     git clone https://github.com/*YOUR-USERNAME*/angular-flux
+    ```
+
 - Hack it
-- Test it
+
+- Test it (contribute some more!)
+    ```
     npm test
+    ```
+
 - Open a PR!
 
