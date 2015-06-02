@@ -1,5 +1,7 @@
 # todo-angular-flux
 
+![Build Status](https://travis-ci.org/javamonn/todo-angular-flux.svg?branch=master)
+
 ## Running
 
 You must have [npm](https://www.npmjs.org/) installed on your computer.
