@@ -39,7 +39,6 @@
   let FooterSection = () => ({
     restrict: 'E',
     template: FooterSectionTemplate,
-    replace: true,
     scope: {
       todos: '='
     },

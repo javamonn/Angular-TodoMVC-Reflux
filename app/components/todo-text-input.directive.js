@@ -27,7 +27,6 @@
   let TodoTextInput = () => ({
     restrict: 'E',
     template: TodoTextInputTemplate,
-    replace: true,
     scope: {
       placeholder: '@',
       value: '@',

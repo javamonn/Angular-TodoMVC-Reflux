@@ -29,7 +29,10 @@ describe('MainSection', () => {
 
   describe('template', () => {
     it('contains a todo list', () => {
-      expect(template.html()).toContain('class="todo-list"');
+      expect(template.find('.todo-list')).toBeTruthy();
+    });
+    it('contains a todo element for each todo', () => {
+      expect(template.find('todo-item').length).toBe(3);
     });
   });
 

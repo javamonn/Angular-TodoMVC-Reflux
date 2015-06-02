@@ -66,7 +66,6 @@
     link: TodoItemLink,
     controllerAs: 'TodoItem',
     bindToController: true,
-    replace: true
   });
   
   angular

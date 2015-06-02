@@ -48,8 +48,7 @@
     },
     controllerAs: 'mainSection',
     controller: ['TodoActions', 'StateActions', '$scope', MainSectionController],
-    bindToController: true,
-    replace: true
+    bindToController: true
   });
 
   angular

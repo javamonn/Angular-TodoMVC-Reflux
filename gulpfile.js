@@ -35,10 +35,6 @@ gulp.task('build', function() {
   .pipe(gulp.dest('./app/_build'));
 });
 
-gulp.task('clean', function() {
-  return gulp.src(['./app/_build/app.js'], {read: false})
-    .pipe(clean());
-});
 
 gulp.task('styles', function() {
   return gulp.src('node_modules/todomvc-app-css/index.css')
@@ -47,6 +43,11 @@ gulp.task('styles', function() {
 });
 
 /********************************************************/
+
+gulp.task('clean', function() {
+  return gulp.src(['./app/_build/app.js'], {read: false})
+    .pipe(clean());
+});
 
 gulp.task('test', ['build'], function(done) {
   return karma.start({

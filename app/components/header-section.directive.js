@@ -35,8 +35,7 @@
       areAllComplete: '='
     },
     controllerAs: 'HeaderSection',
-    bindToController: true,
-    replace: true
+    bindToController: true
   });
 
   angular
