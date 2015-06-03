@@ -32,7 +32,8 @@
     template: HeaderSectionTemplate,
     controller: ['TodoActions', 'TodoStore', HeaderSectionController],
     controllerAs: 'HeaderSection',
-    bindToController: true
+    bindToController: true,
+    replace: true
   });
 
   angular

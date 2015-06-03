@@ -13,7 +13,7 @@
         <label class="todo-text" >{{TodoItem.todo.text}}</label>
         <button class="destroy" ng-click="TodoItem._onDestroyClick()"></button>
       </div>
-      <div ng-if="TodoItem._isEditing">
+      <div class="edit-container" ng-if="TodoItem._isEditing">
         <todo-text-input 
           class="edit" 
           on-save="TodoItem._onSave" 

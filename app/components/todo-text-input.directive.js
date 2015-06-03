@@ -32,7 +32,8 @@
       value: '@',
       onSave: '&'
     },
-    link: TodoTextInputLink
+    link: TodoTextInputLink,
+    replace: true
   });
 
   angular
