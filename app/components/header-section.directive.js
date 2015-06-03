@@ -33,7 +33,6 @@
     controller: ['TodoActions', 'TodoStore', HeaderSectionController],
     controllerAs: 'HeaderSection',
     bindToController: true,
-    replace: true
   });
 
   angular

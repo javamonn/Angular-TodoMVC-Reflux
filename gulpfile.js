@@ -59,6 +59,8 @@ gulp.task('test', ['build'], function(done) {
 });
 
 gulp.task('develop', ['build', 'styles'], function(done) {
+  var server = gls.static('app', process.env.PORT || 8000);
+  server.start();
   karma.start({
     configFile: require('path').resolve('karma.conf.js')
   });
