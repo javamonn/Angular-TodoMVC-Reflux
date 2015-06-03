@@ -26,9 +26,7 @@
     this._filterState = 'all';
     this.completedCount = () => this.todos.count(todo => todo.complete);
     this.notCompletedCount = () => this.todos.count(todo => !todo.complete);
-    this._clearCompleted = () => {
-      TodoActions.destroyCompleted();  
-    };
+    this._clearCompleted = () => TodoActions.destroyCompleted();
 
     this._filter = filterLabel => {
       this._filterState = filterLabel
