@@ -1,6 +1,6 @@
 # Angular-TodoMVC-Redux
 
-![Build Status](https://travis-ci.org/javamonn/todo-angular-flux.svg?branch=master)
+![Build Status](https://travis-ci.org/javamonn/Angular-TodoMVC-Redux.svg?branch=master)
 
 ## Motivation
 
