@@ -11,7 +11,7 @@ Conventional Angular-esque MVC is eschewed in favor of using directives as light
 modular components backed by [Reflux.js](https://github.com/spoike/refluxjs) stores and 
 a unidirectional data flow. All data is immutable through use of [Immutable.js](https://github.com/facebook/immutable-js).
 
-Data is (optimistically) persisted locally with [PouchDB](https://github.com/pouchdb/pouchdb). We 
+Data is (optimistically) persisted locally with [PouchDB](https://github.com/pouchdb/pouchdb). I 
 currently do not do any syncing with a server but this could be trivially implemented.
 Aditionally, the unidirectional data flow means the persist store could be swapped out
 with something that talks to a server directly without changing any other part of the
@@ -19,7 +19,7 @@ application.
 
 UI state is driven by [Bacon.js](https://github.com/baconjs/bacon.js/) with
 Reflux actions used to model and emit events. Local ui-specific state is maintained by 
-some components but we deliberately do not make use of Angular's two way data binding to
+some components but I deliberately do not make use of Angular's two way data binding to
 communicate state across components.
 
 All JS is writtin in ES6, transpiled with [Babel](https://github.com/babel/babel), and tested
