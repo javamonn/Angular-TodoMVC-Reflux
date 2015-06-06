@@ -2,18 +2,12 @@
 
 describe('MainSection', () => {
 
-  const TodoRecord = Immutable.Record({
-    id: cuid(),
-    complete: false,
-    text: "Experiment with Angular and Reflux"
-  });
-
   var template,
       controller;
 
   beforeEach(() => {
     module('app');
-    inject(($compile, $rootScope) => {
+    inject(($compile, $rootScope, TodoRecord) => {
       var $scope = $rootScope.$new();
       $rootScope.todos = Immutable.List([
         new TodoRecord({ id: cuid(), complete: true }),     

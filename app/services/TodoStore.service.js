@@ -1,13 +1,7 @@
 (() => {
   'use strict';
 
-  const TodoRecord = Immutable.Record({
-    id: cuid(),
-    complete: false,
-    text: "Experiment with Angular and Reflux"
-  });
-
-  let TodoStore = function(TodoActions, PersistStore) {
+  let TodoStore = function(TodoActions, PersistStore, TodoRecord) {
 
     let _todos;
 
@@ -57,5 +51,5 @@
 
   angular
     .module('app')
-    .service('TodoStore', ['TodoActions', 'PersistStore', TodoStore]);
+    .service('TodoStore', ['TodoActions', 'PersistStore', 'TodoRecord', TodoStore]);
 })();

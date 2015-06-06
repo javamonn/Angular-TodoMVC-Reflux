@@ -1,18 +1,13 @@
 'use strict';
 
 describe('TodoItem', () => {
-  const TodoRecord = Immutable.Record({
-    id: cuid(),
-    complete: false,
-    text: "Experiment with Angular and Reflux"
-  });
 
   var element,
       controller;
 
   beforeEach(() => {
     module('app');
-    inject(($compile, $rootScope) => {
+    inject(($compile, $rootScope, TodoRecord) => {
       var $scope = $rootScope.$new();
       var template = angular.element('<todo-item todo=todo></footer-section>');
       $rootScope.todo = new TodoRecord({id: cuid(), complete: false});

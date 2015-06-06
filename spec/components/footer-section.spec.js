@@ -2,18 +2,12 @@
 
 describe('FooterSection', () => {
 
-  const TodoRecord = Immutable.Record({
-    id: cuid(),
-    complete: false,
-    text: "Experiment with Angular and Reflux"
-  });
-
   var element,
       controller;
 
   beforeEach(() => {
     module('app');
-    inject(($compile, $rootScope) => {
+    inject(($compile, $rootScope, TodoRecord) => {
       var $scope = $rootScope.$new();
       var template = angular.element('<footer-section todos=todos></footer-section>');
       $rootScope.todos = Immutable.List([

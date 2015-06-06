@@ -6,18 +6,14 @@ describe('TodoStore', function() {
   
   beforeEach(() => {
     var PersistStoreMock = {};
-    const TodoRecord = Immutable.Record({
-      id: cuid(),
-      complete: false,
-      text: "Experiment with Angular and Reflux"
-    });
-
     module('app', $provide => {
       $provide.service('PersistStore', $q => {
         var initialize = jasmine.createSpy('initialize').and.callFake(() => {
           var deferred = $q.defer();
           var promise = deferred.promise;
-          deferred.resolve(Immutable.List([new TodoRecord]));
+          inject(TodoRecord => {
+            deferred.resolve(Immutable.List([new TodoRecord]));
+          });
           return promise;
         });
         
