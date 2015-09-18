@@ -1,4 +1,4 @@
-# Angular-TodoMVC-Redux
+# Angular-TodoMVC-Reflux
 
 ![Build Status](https://travis-ci.org/javamonn/Angular-TodoMVC-Redux.svg?branch=master)
 
