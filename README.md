@@ -1,6 +1,6 @@
 # Angular-TodoMVC-Reflux
 
-![Build Status](https://travis-ci.org/javamonn/Angular-TodoMVC-Redux.svg?branch=master)
+[![Build Status](https://travis-ci.org/javamonn/Angular-TodoMVC-Reflux.svg?branch=master)](https://travis-ci.org/javamonn/Angular-TodoMVC-Reflux)
 
 ## Motivation
 
